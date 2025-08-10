@@ -1,0 +1,18 @@
+install package.json - npm init -y
+install dependencies - npm i express dotenv pg cors joi 
+install nodemon as a dev dependency - npm i --save-dev nodemon 
+
+express - express framework to build the rest api
+
+dotenv - to get or fetch the values from the dotenv file
+
+pg- the postgres package which allows us to connect to the database and do the queries in order to process or retrieve data from the database
+
+cors - for cross origin 
+
+joi - for schema validation. Any request that comes to the contoroller should be validated
+
+update the "script" in the package.json file  - "dev": "nodemon src/index.js"
+update add type in the package.json file  -   "type":"module",
+
+- build the express server
