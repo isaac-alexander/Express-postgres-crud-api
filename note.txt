@@ -16,3 +16,42 @@ update the "script" in the package.json file  - "dev": "nodemon src/index.js"
 update add type in the package.json file  -   "type":"module",
 
 - build the express server
+
+
+ TO CREATE A TABLE
+- From the data folder, create a data.sql file
+  in the data.sql file create a query with 
+  CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW()
+ )
+
+-to run the sql query, create a new file createUserTable.js
+import pool from "../config/db.js";
+import pool from "../config/db.js";
+
+have a createUserTable function 
+import pool from "../config/db.js";
+
+const createUserTable = async () => {
+    const queryText = `
+    CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW()
+)
+    `;
+
+    try {
+        pool.query(queryText);
+        console.log("User table created if not exists");
+    } catch (error) {
+        console.log("Error creating users table : ", error);
+    }
+};
+
+export default createUserTable;
+ stop the server, the call the createUserTable() in the index.js after the error handling
