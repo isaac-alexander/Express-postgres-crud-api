@@ -43,7 +43,7 @@ export const updateUser = async (req, res, next) => {
     const { name, email } = req.body; // destructure the name and the email coming from the request body
     try {
         const updatedUser = await updateUserService(req.params.id, name, email); // call the updateUserService in the request params we'll have the id, name and email to be updated
-        if (!user) return handleResponse(res, 404, "User not found") // if there's no user
+        if (!updatedUser) return handleResponse(res, 404, "User not found") // if there's no user
         handleResponse(res, 200, "User updated successfully", updatedUser) // call the handleResponse and pass the values and updatedUser
     } catch (err) {
         next(err); // passes the error to the error handler middleware
@@ -53,7 +53,7 @@ export const updateUser = async (req, res, next) => {
 export const deleteUser = async (req, res, next) => {
     try {
         const deletedUser = await deleteUserService(req.params.id); // call the deleteUserService in the request params we'll have the id of the user to be deleted
-        if (!user) return handleResponse(res, 404, "User not found") // if there's no user
+        if (!deletedUser) return handleResponse(res, 404, "User not found") // if there's no user
         handleResponse(res, 200, "User deleted successfully", deletedUser) // call the handleResponse and pass the values and deletedUser
     } catch (err) {
         next(err); // passes the error to the error handler middleware
