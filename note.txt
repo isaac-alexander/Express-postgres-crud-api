@@ -55,3 +55,27 @@ const createUserTable = async () => {
 
 export default createUserTable;
  stop the server, the call the createUserTable() in the index.js after the error handling
+
+            TO USE THE joi
+- Create an input validator file in the middleware
+- Import the Joi from "joi"
+
+Define the User schema for how the inputs should look like using the joi.Object 
+
+const userScheme = Joi.object({
+    name: Joi.string().min(3).required(),
+    email: Joi.string().email().required(),
+});
+
+Create a validator function and export it
+
+const validateUser = (req, res, next) => {
+    const {error} = userScheme.validate(req.body);
+    if(error) return res.status(400).json({
+        status: 400,
+        message: error.details[0].message,
+    });
+    next()
+};
+
+export default validateUser;
